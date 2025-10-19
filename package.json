@@ -1,0 +1,15 @@
+{
+  "name": "nodejs",
+  "version": "0.1.0",
+  "description": "open source library",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
+}
