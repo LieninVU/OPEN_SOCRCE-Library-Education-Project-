@@ -8,14 +8,26 @@ class Requests{
 
 	constructor(table_path){
 		this.table_path = table_path;
-		this.db = new sql.Database(`./${this.table_path}.db`);
-
+		if(!this.is_table_exists(table_path)){
+			this.db = new sql.Database(`./${this.table_path}.db`, (err) => {
+				if (err) {
+					console.error('Ошибка подключения к базе:', err.message);
+				} else {
+					console.log('Подключено к базе данных');
+				}})
+		}
 		// this.is_table_exists(table_path);
 	}
 
-	is_table_exists() {
+	is_table_exists(table_path) {
 		fs.access(`./${table_path}.db`, fs.constants.F_OK, (err) => {
-			create_table(table_path);});}
+			if(err){
+				create_table(table_path);
+			}
+			else{
+				console.log("The table already exsist")
+			}})
+		}
 
 
 	create_table() {
@@ -137,12 +149,14 @@ class Requests{
 		})
 	}
 	get_books(){
-		this.db.all('SELECT * FROM books;', (err, rows) => {
+		return new Promise((resolve, reject) => this.db.all('SELECT * FROM books;', (err, rows) => {
 			if (err) {
 				console.error(err);
+				reject(err)
 			}
-			return rows;
-		})
+			console.log(rows)
+			resolve(rows);
+		}))
 	}
 	get_book_by_id(id){
 		this.db.get('SELECT * FROM books WHERE id = ?;', [id], (err, row) => {

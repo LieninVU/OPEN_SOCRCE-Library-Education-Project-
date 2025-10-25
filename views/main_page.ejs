@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FREE LIBRARY</title>
+</head>
+<body>
+    <a id="add_book" href="/add_book">Add Book</a>
+    <div id="books_list">
+        <% if (books != null){books.forEach((book) => { %>
+            <div id="book">
+                <div id="title"><%= book.title %></div>
+                <div id="author"><%= book.author %></div>
+                <div id="year"><%= book.year %></div>
+            </div>
+        <% })} %>   
+
+    </div>
+
+
+    
+</body>
+
+</html>
