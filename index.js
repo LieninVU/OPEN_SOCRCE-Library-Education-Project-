@@ -9,6 +9,7 @@ const requests = new Requests(file_path);
 
 const app = express()
 app.set('view engine', 'ejs')
+app.use(express.static('public'))
 app.use(express.urlencoded({extended: false}))
 
 
