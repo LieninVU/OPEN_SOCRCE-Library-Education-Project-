@@ -16,7 +16,6 @@ app.use(express.urlencoded({extended: false}))
 app.get('/', async (req, res) => {
     const books = await library.get_books()
     const processedBooks = books === undefined ? null : books
-    
     console.log(processedBooks)
     
     res.render('main_page', { books: processedBooks})
@@ -37,6 +36,17 @@ app.get('/user/:username/:id', (req, res) => {
     res.render('user')
 })
 
+app.get('/book/:id', async (req, res) => {
+    const book_data = await library.get_book_by_id(req.params.id)
+    res.render('book', { book: book_data })
+})
+
+app.get('/book/:id/read', async (req, res) => {
+    const book_data = await library.get_book_by_id(req.params.id)
+    res.render('book_read', { book: book_data })
+})
+
+
 app.listen(3000, () => {console.log('Server running')})
 
 
@@ -44,6 +54,15 @@ app.listen(3000, () => {console.log('Server running')})
 function add_book(){
 
 }
+
+
+function open_book(book_id){
+    console.log(book_id)
+}
+
+
+
+
 
 
 

@@ -159,12 +159,13 @@ class Requests{
 		}))
 	}
 	get_book_by_id(id){
-		this.db.get('SELECT * FROM books WHERE id = ?;', [id], (err, row) => {
+		return new Promise((resolve, reject) => this.db.get('SELECT * FROM books WHERE id = ?;', [id], (err, row) => {
 			if (err) {
 				console.error(err);
+				reject(err)
 			}
-			return row;
-		})
+			resolve(row);
+		}))
 	}
 	get_users(){
 		return new Promise((resolve, reject) => {
