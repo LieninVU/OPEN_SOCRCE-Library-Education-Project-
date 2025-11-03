@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= book.title %></title>
+</head>
+<body>
+    <div class="description">
+        <div id="title"><%= book.title %></div>
+        <div id="author"><%= book.author%></div>
+        <div id="year"><%= book.year%></div>
+        <div id="avarage_raiting"><%= book.average_rating%></div>
+    </div>
+    <a id="read" href="/book/<%= book.id %>/read">Read</a>
+    <button id="add_comment">Add Comment</button>
+    <div id="comments">
+        <% if (book.comments != null){book.comments.forEach((comment) => { %>
+            <div class="comment">
+                <div class="username"><%= comment.username %></div>
+                <div class="comment_text"><%= comment.comment_text %></div>
+            </div>
+        <% })} %>
+    </div>
+    
+</body>
+</html>
